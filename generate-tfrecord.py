@@ -30,15 +30,15 @@ def main(_):
     annotations['LabelName'] = annotations['LabelName'].map(lambda n: class_descriptions[n])
     annotations = annotations.groupby('ImageID')
 
-    images = tf.gfile.Glob(FLAGS.images_dir + '/*/*.jpg')
+    images = tf.io.gfile.glob(FLAGS.images_dir + '/*/*.jpg')
     images = map(lambda i: (os.path.basename(i).split('.jpg')[0], i), images)
     images = dict(images)
     print(f'{len(images)} images')
 
-    writer = tf.python_io.TFRecordWriter(FLAGS.output_file)
+    writer = tf.io.TFRecordWriter(FLAGS.output_file)
     for image_id, path in images.items():
         img_width, img_height = Image.open(path).size
-        img_data = tf.gfile.GFile(path, 'rb').read()
+        img_data = tf.io.gfile.GFile(path, 'rb').read()
 
         xmins = []
         xmaxs = []
