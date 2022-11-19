@@ -1,6 +1,5 @@
 import pandas as pd
-import tensorflow.compat.v1 as tf
-tf.compat.v1.disable_v2_behavior()
+import tensorflow as tf
 from PIL import Image
 import os
 
